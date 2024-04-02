@@ -7,8 +7,8 @@
 
 #include <string>
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+//#include <ft2build.h>
+//#include FT_FREETYPE_H
 
 namespace agl
 {
@@ -16,7 +16,7 @@ namespace agl
 	{
 		private:
 			agl::Rectangle	   charBox;
-			agl::Glyph		 **glyph  = nullptr;
+			std::vector<agl::Glyph		 *>glyph;
 			agl::Font		  *font	  = nullptr;
 			int				   length = 0;
 			int				   height = 0;
@@ -26,7 +26,7 @@ namespace agl
 
 		public:
 			void setFont(Font *font);
-			void setText(std::string str);
+			void setText(const std::string &str);
 			void setScale(float scale);
 			void setPosition(agl::Vec<float, 3> position);
 			void setColor(agl::Color color);

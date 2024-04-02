@@ -9,12 +9,12 @@ void agl::Text::setFont(Font *font)
 	charBox.setColor(agl::Color::White);
 }
 
-void agl::Text::setText(std::string str)
+void agl::Text::setText(const std::string& str)
 {
-	delete[] glyph;
+	
 	
 	length = str.length();
-	glyph = new Glyph*[length];
+	glyph.resize(length);
 
 	width = 0;
 
@@ -24,6 +24,13 @@ void agl::Text::setText(std::string str)
 
 		width += g->advance;
 		glyph[i] = font->getGlyph(str[i]);
+    // printf("add glyph: value =%c\n", str[i]);
+    // printf("         : size=%d, %d\n", g->size.x, g->size.y);
+    // printf("         : scale=%f, %f\n", g->scale.x, g->scale.y);
+    // printf("         : pos=%f, %f\n", g->position.x, g->position.y);
+    // printf("         : bearing=%d, %d\n", g->bearing.x, g->bearing.y);
+    // printf("         : advance =%d\n", g->advance);
+    
 	}
 }
 
@@ -44,9 +51,8 @@ void agl::Text::setColor(agl::Color color)
 
 void agl::Text::clearText()
 {
-	delete[] glyph;
-	glyph = nullptr;
 	length = 0;
+  glyph.clear();
 }
 
 agl::Glyph *agl::Text::getGlyph(int i)
